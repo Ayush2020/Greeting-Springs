@@ -56,4 +56,9 @@ public class GreetingController extends ServiceLayer {
     public ResponseEntity<String> updateGreeting(@PathVariable Long id, @RequestBody Greeting updatedGreeting) {
         return new ResponseEntity<>("Updated Greeting: " + greetingService.updateMessage(id, updatedGreeting.getMessage()).getMessage(), HttpStatus.OK);
     }
+    @DeleteMapping("/greeting/delete/{id}")
+    public ResponseEntity<String> deleteGreeting(@PathVariable Long id) {
+        greetingService.deleteMessage(id);
+        return new ResponseEntity<>("Greeting deleted successfully!", HttpStatus.OK);
+    }
 }

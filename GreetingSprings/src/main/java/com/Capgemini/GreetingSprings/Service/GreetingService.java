@@ -35,4 +35,7 @@ public class GreetingService {
                 })
                 .orElseThrow(() -> new RuntimeException("Greeting Not Found"));
     }
+    public void deleteMessage(Long id) {
+        greetingRepo.deleteById(id);
+    }
 }
