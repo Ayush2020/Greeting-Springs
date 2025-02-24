@@ -1,12 +1,18 @@
 package com.Capgemini.GreetingSprings.Controller;
 
+import com.Capgemini.GreetingSprings.Entity.Greeting;
+import com.Capgemini.GreetingSprings.Service.GreetingService;
 import com.Capgemini.GreetingSprings.Service.ServiceLayer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class GreetingController extends ServiceLayer {
+
+    @Autowired
+    private GreetingService greetingService;
 
     @GetMapping("/greeting")
     public ResponseEntity<String> getGreeting(@RequestParam(value="name", defaultValue = "World") String name){
@@ -15,7 +21,7 @@ public class GreetingController extends ServiceLayer {
 
     @PostMapping("/greeting/{name}")
     public ResponseEntity<String> postGreeting(@PathVariable("name") String name){
-        return new ResponseEntity<>(String.format("Create, %s", name), HttpStatus.OK);
+        return new ResponseEntity<>(greetingService.postMessage(new Greeting(name)).getMessage(), HttpStatus.OK);
     }
 
     @PutMapping("/greeting/put/{name}")
@@ -34,4 +40,10 @@ public class GreetingController extends ServiceLayer {
                     , @RequestParam(value = "lastName", defaultValue = "World") String lastName){
         return new ResponseEntity<>(firstName + " " + lastName, HttpStatus.OK);
     }
+
+    @GetMapping("greeting/get/{id}")
+    public ResponseEntity<String> greetings(@PathVariable Long id){
+        return new ResponseEntity<>(greetingService.getMessage(id), HttpStatus.OK);
+    }
+
 }
