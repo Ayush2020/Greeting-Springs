@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class GreetingController extends ServiceLayer {
 
@@ -45,6 +47,10 @@ public class GreetingController extends ServiceLayer {
     @GetMapping("greeting/get/{id}")
     public ResponseEntity<String> greetings(@PathVariable Long id){
         return new ResponseEntity<>(greetingService.getMessage(id), HttpStatus.OK);
+    }
+    @GetMapping("/greeting/all")
+    public ResponseEntity<List<Greeting>> getAllGreetings() {
+        return new ResponseEntity<>(greetingService.getAllMessages(), HttpStatus.OK);
     }
 
 }

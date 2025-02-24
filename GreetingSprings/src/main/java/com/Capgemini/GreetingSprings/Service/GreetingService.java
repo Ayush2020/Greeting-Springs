@@ -4,6 +4,7 @@ import com.Capgemini.GreetingSprings.Entity.Greeting;
 import com.Capgemini.GreetingSprings.Repository.GreetingRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,5 +23,8 @@ public class GreetingService {
 
     public Greeting postMessage(Greeting greeting) {
         return greetingRepo.save(greeting);
+    }
+    public List<Greeting> getAllMessages() {
+        return (List<Greeting>) greetingRepo.findAll();
     }
 }
