@@ -41,6 +41,7 @@ public class GreetingController extends ServiceLayer {
         return new ResponseEntity<>(firstName + " " + lastName, HttpStatus.OK);
     }
 
+    
     @GetMapping("greeting/get/{id}")
     public ResponseEntity<String> greetings(@PathVariable Long id){
         return new ResponseEntity<>(greetingService.getMessage(id), HttpStatus.OK);
