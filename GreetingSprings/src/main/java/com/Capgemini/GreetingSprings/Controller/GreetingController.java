@@ -52,5 +52,8 @@ public class GreetingController extends ServiceLayer {
     public ResponseEntity<List<Greeting>> getAllGreetings() {
         return new ResponseEntity<>(greetingService.getAllMessages(), HttpStatus.OK);
     }
-
+    @PutMapping("/greeting/edit/{id}")
+    public ResponseEntity<String> updateGreeting(@PathVariable Long id, @RequestBody Greeting updatedGreeting) {
+        return new ResponseEntity<>("Updated Greeting: " + greetingService.updateMessage(id, updatedGreeting.getMessage()).getMessage(), HttpStatus.OK);
+    }
 }

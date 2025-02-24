@@ -27,4 +27,12 @@ public class GreetingService {
     public List<Greeting> getAllMessages() {
         return (List<Greeting>) greetingRepo.findAll();
     }
+    public Greeting updateMessage(Long id, String newMessage) {
+        return greetingRepo.findById(id)
+                .map(greeting -> {
+                    greeting.setMessage(newMessage);
+                    return greetingRepo.save(greeting);
+                })
+                .orElseThrow(() -> new RuntimeException("Greeting Not Found"));
+    }
 }
